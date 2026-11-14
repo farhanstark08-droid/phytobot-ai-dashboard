@@ -1492,3 +1492,39 @@ footer {
         height: 300px;
     }
 }
+/* FIX DASHBOARD CARD HEADERS */
+
+.main-health-layout .card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.main-health-layout .card-title > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+}
+
+.main-health-layout .card-title h4 {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.main-health-layout .card-title .tag {
+    flex-shrink: 0;
+}
+
+.main-health-layout .treatment-info,
+.main-health-layout .image-card {
+    min-width: 0;
+    overflow: hidden;
+}
