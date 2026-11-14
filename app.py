@@ -15,8 +15,8 @@ APP_DIR = Path(__file__).resolve().parent
 DATA_DIR = APP_DIR / "data"
 IMAGE_DIR = DATA_DIR / "images"
 DB_PATH = DATA_DIR / "agribot.db"
-MODEL_PATH = APP_DIR / "models" / "leaf_disease_model.keras"
-LABELS_PATH = APP_DIR / "models" / "labels.json"
+MODEL_PATH = APP_DIR / "models" / "phytobot_model.keras"
+LABELS_PATH = APP_DIR / "models" / "class_names.json"
 DATA_DIR.mkdir(exist_ok=True)
 IMAGE_DIR.mkdir(parents=True, exist_ok=True)
 (MODEL_PATH.parent).mkdir(exist_ok=True)
