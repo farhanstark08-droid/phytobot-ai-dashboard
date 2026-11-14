@@ -769,3 +769,157 @@ footer {
         flex-wrap: wrap;
     }
 }
+/* PHYTOBOT AI - FINAL LAYOUT CORRECTION */
+
+@media screen and (min-width: 1024px) {
+
+    html, body {
+        width: 100%;
+        min-height: 100%;
+        height: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .top {
+        height: 60px;
+        min-height: 60px;
+        display: flex;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 10;
+    }
+
+    main {
+        width: 100%;
+        height: calc(100vh - 60px);
+        min-height: 600px;
+        padding: 10px 20px;
+        display: grid;
+
+        grid-template-rows:
+            75px
+            32px
+            85px
+            32px
+            120px
+            32px
+            minmax(180px, 1fr)
+            25px;
+
+        gap: 7px;
+        overflow: visible;
+    }
+
+    .hero {
+        min-height: 0;
+        height: 100%;
+        margin: 0;
+        padding: 12px 22px;
+    }
+
+    .section-head {
+        min-height: 0;
+        height: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .section-head h3 {
+        font-size: 14px;
+        line-height: 1.4;
+        margin: 3px 0;
+    }
+
+    .grid {
+        height: 100%;
+        min-height: 0;
+        gap: 12px;
+    }
+
+    .metrics {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .two, .vision {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+        min-width: 0;
+        min-height: 0;
+        padding: 12px 15px;
+    }
+
+    .metric-head {
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .metrics .value {
+        font-size: 22px;
+        line-height: 1.5;
+        margin: 5px 0;
+    }
+
+    .card-title {
+        min-height: 25px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .card-title h4 {
+        font-size: 12px;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .coords {
+        margin: 12px 0;
+        gap: 15px;
+    }
+
+    .coords strong {
+        display: block;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .irrow {
+        margin: 12px 0;
+    }
+
+    .hint {
+        font-size: 9px;
+        line-height: 1.6 !important;
+        margin: 7px 0;
+    }
+
+    .photo {
+        height: calc(100% - 65px);
+        min-height: 90px;
+        margin-top: 10px;
+    }
+
+    .diagnosis {
+        margin: 15px 0;
+        line-height: 1.5;
+    }
+
+    .diagnosis h2 {
+        line-height: 1.5;
+    }
+
+    .result-note {
+        line-height: 1.6;
+        font-size: 11px;
+    }
+
+    footer {
+        margin: 0;
+        padding: 5px 0;
+        line-height: 1.5;
+    }
+}
