@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 from datetime import datetime, timezone
 from pathlib import Path
 import sqlite3, os, json, uuid
-from model_training.disease_treatments import get_treatment
+from model_training.disease_treatements import get_treatment
 
 try:
     import numpy as np
