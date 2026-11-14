@@ -1391,3 +1391,104 @@ footer {
         height: 300px;
     }
 }
+/* =================================
+   PHYTOBOT NEW 2x2 HEALTH DASHBOARD
+================================= */
+
+.main-health-layout {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    align-items: stretch;
+}
+
+/* All four cards */
+.main-health-layout > .card {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* AI DIAGNOSIS */
+.main-health-layout .result-card {
+    min-height: 280px;
+    padding: 20px;
+}
+
+/* DISEASED PLANT MAP */
+.main-health-layout .map-card {
+    padding: 20px;
+}
+
+.main-health-layout #plantMap {
+    width: 100%;
+    height: 320px;
+    min-height: 320px;
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* AI TREATMENT */
+.main-health-layout .treatment-info {
+    padding: 20px;
+    margin: 0;
+    width: 100%;
+}
+
+.main-health-layout .treatment-item {
+    padding: 10px 12px;
+    margin-top: 10px;
+}
+
+/* AUTOMATIC CAMERA */
+.main-health-layout .image-card {
+    padding: 20px;
+}
+
+.main-health-layout .image-card .photo {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+}
+
+.main-health-layout .image-card .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* TABLET */
+@media (max-width: 850px) {
+    .main-health-layout {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .main-health-layout #plantMap {
+        height: 280px;
+        min-height: 280px;
+    }
+
+    .main-health-layout .image-card .photo {
+        height: 280px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .main-health-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .main-health-layout #plantMap {
+        height: 300px;
+        min-height: 300px;
+    }
+
+    .main-health-layout .image-card .photo {
+        height: 300px;
+    }
+}

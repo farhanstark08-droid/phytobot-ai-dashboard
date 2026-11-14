@@ -1,391 +1,276 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><title>PhytoBot AI | Autonomous Crop Doctor</title>
 
-    <title>PhytoBot AI | Autonomous Crop Doctor</title>
+<!-- MAIN DASHBOARD CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- MAIN DASHBOARD CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<!-- LEAFLET MAP CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
-    <!-- LEAFLET MAP CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head><body><!-- HEADER --><header class="top"><div class="brand">
+    <div class="logo">A</div>
 
-</head>
+    <div>
+        <h1>AgriBot <span>AI</span></h1>
+        <p>Autonomous Crop Doctor · Live Monitoring</p>
+    </div>
+</div>
 
-<body>
+<div class="live">
+    <i></i>
+    <span id="connection">CONNECTING</span>
+    <small id="clock">--</small>
+</div>
 
-<!-- HEADER -->
-<header class="top">
+</header><main><!-- HERO SECTION -->
+<section class="hero">
 
-    <div class="brand">
-        <div class="logo">A</div>
+    <div>
+        <p class="eyebrow">PRECISION AGRICULTURE SYSTEM</p>
 
-        <div>
-            <h1>AgriBot <span>AI</span></h1>
-            <p>Autonomous Crop Doctor · Live Monitoring</p>
-        </div>
+        <h2>
+            Field intelligence,<br>
+            <em>automated.</em>
+        </h2>
+
+        <p class="sub">
+            Live sensor telemetry, GPS tracking and automatic
+            crop-leaf analysis from the rover.
+        </p>
     </div>
 
-    <div class="live">
-        <i></i>
-        <span id="connection">CONNECTING</span>
-        <small id="clock">--</small>
+    <div class="robot-art">
+        <div class="orbit"></div>
+
+        <div class="rover">
+            <span class="cam"></span>
+            <span class="body"></span>
+            <span class="wheel w1"></span>
+            <span class="wheel w2"></span>
+            <span class="wheel w3"></span>
+            <span class="wheel w4"></span>
+        </div>
+
+        <div class="scanline"></div>
     </div>
 
-</header>
+</section>
 
 
-<main>
+<!-- FIELD TELEMETRY -->
+<section class="section-head">
 
-    <!-- HERO SECTION -->
-    <section class="hero">
+    <div>
+        <p class="eyebrow">01 / FIELD TELEMETRY</p>
+        <h3>Environmental conditions</h3>
+    </div>
 
-        <div>
-            <p class="eyebrow">PRECISION AGRICULTURE SYSTEM</p>
+    <span class="pill">AUTO REFRESH · 2 SEC</span>
 
-            <h2>
-                Field intelligence,<br>
-                <em>automated.</em>
-            </h2>
+</section>
 
-            <p class="sub">
-                Live sensor telemetry, GPS tracking and automatic
-                crop-leaf analysis from the rover.
-            </p>
-        </div>
 
-        <div class="robot-art">
-            <div class="orbit"></div>
+<section class="grid metrics">
 
-            <div class="rover">
-                <span class="cam"></span>
-                <span class="body"></span>
-                <span class="wheel w1"></span>
-                <span class="wheel w2"></span>
-                <span class="wheel w3"></span>
-                <span class="wheel w4"></span>
+    <article class="card metric">
+        <div class="metric-head">Temperature <b>°C</b></div>
+        <div class="value" id="temp">--<small>°C</small></div>
+        <div class="bar"><i id="tempbar"></i></div>
+        <p>Ambient temperature</p>
+    </article>
+
+    <article class="card metric">
+        <div class="metric-head">Humidity <b>%</b></div>
+        <div class="value" id="humidity">--<small>%</small></div>
+        <div class="bar"><i id="hbar"></i></div>
+        <p>Air relative humidity</p>
+    </article>
+
+    <article class="card metric">
+        <div class="metric-head">Soil moisture <b>%</b></div>
+        <div class="value" id="soil">--<small>%</small></div>
+        <div class="bar"><i id="soilbar"></i></div>
+        <p id="soilstate">Waiting for sensor</p>
+    </article>
+
+    <article class="card metric">
+        <div class="metric-head">Battery <b>V</b></div>
+        <div class="value" id="battery">--<small>V</small></div>
+        <div class="bar"><i id="batterybar"></i></div>
+        <p>Rover power status</p>
+    </article>
+
+</section>
+
+
+<!-- AUTONOMOUS NAVIGATION -->
+<section class="section-head">
+
+    <div>
+        <p class="eyebrow">02 / AUTONOMOUS NAVIGATION</p>
+        <h3>Rover position & path sensors</h3>
+    </div>
+
+</section>
+
+
+<section class="grid two">
+
+    <!-- GPS LOCATION -->
+    <article class="card gps">
+
+        <div class="card-title">
+
+            <div>
+                <span class="icon">⌖</span>
+                <h4>Live GPS location</h4>
             </div>
 
-            <div class="scanline"></div>
-        </div>
-
-    </section>
-
-
-    <!-- FIELD TELEMETRY -->
-    <section class="section-head">
-
-        <div>
-            <p class="eyebrow">01 / FIELD TELEMETRY</p>
-            <h3>Environmental conditions</h3>
-        </div>
-
-        <span class="pill">AUTO REFRESH · 2 SEC</span>
-
-    </section>
-
-
-    <section class="grid metrics">
-
-        <article class="card metric">
-            <div class="metric-head">Temperature <b>°C</b></div>
-            <div class="value" id="temp">--<small>°C</small></div>
-            <div class="bar"><i id="tempbar"></i></div>
-            <p>Ambient temperature</p>
-        </article>
-
-        <article class="card metric">
-            <div class="metric-head">Humidity <b>%</b></div>
-            <div class="value" id="humidity">--<small>%</small></div>
-            <div class="bar"><i id="hbar"></i></div>
-            <p>Air relative humidity</p>
-        </article>
-
-        <article class="card metric">
-            <div class="metric-head">Soil moisture <b>%</b></div>
-            <div class="value" id="soil">--<small>%</small></div>
-            <div class="bar"><i id="soilbar"></i></div>
-            <p id="soilstate">Waiting for sensor</p>
-        </article>
-
-        <article class="card metric">
-            <div class="metric-head">Battery <b>V</b></div>
-            <div class="value" id="battery">--<small>V</small></div>
-            <div class="bar"><i id="batterybar"></i></div>
-            <p>Rover power status</p>
-        </article>
-
-    </section>
-
-
-    <!-- AUTONOMOUS NAVIGATION -->
-    <section class="section-head">
-
-        <div>
-            <p class="eyebrow">02 / AUTONOMOUS NAVIGATION</p>
-            <h3>Rover position & path sensors</h3>
-        </div>
-
-    </section>
-
-
-    <section class="grid two">
-
-        <!-- GPS LOCATION -->
-        <article class="card gps">
-
-            <div class="card-title">
-
-                <div>
-                    <span class="icon">⌖</span>
-                    <h4>Live GPS location</h4>
-                </div>
-
-                <span class="tag" id="gpsstatus">NO FIX</span>
-
-            </div>
-
-            <div class="coords">
-
-                <div>
-                    <label>LATITUDE</label>
-                    <strong id="lat">--</strong>
-                </div>
-
-                <div>
-                    <label>LONGITUDE</label>
-                    <strong id="lon">--</strong>
-                </div>
-
-            </div>
-
-            <div class="gps-foot">
-
-                <span id="sats">Satellites: --</span>
-
-                <a id="maplink" href="#" target="_blank" rel="noopener">
-                    OPEN MAP ↗
-                </a>
-
-            </div>
-
-            <p class="hint">
-                NEO-6M GPS · Coordinates update automatically
-                when a GPS fix is available.
-            </p>
-
-        </article>
-
-
-        <!-- IR LINE TRACKING -->
-        <article class="card">
-
-            <div class="card-title">
-
-                <div>
-                    <span class="icon">⌁</span>
-                    <h4>IR line tracking</h4>
-                </div>
-
-                <span class="tag">3-CHANNEL</span>
-
-            </div>
-
-            <div class="irrow">
-
-                <div class="ir" id="irL">
-                    <span></span>
-                    <b>LEFT</b>
-                    <small id="irlv">--</small>
-                </div>
-
-                <div class="ir" id="irC">
-                    <span></span>
-                    <b>CENTER</b>
-                    <small id="ircv">--</small>
-                </div>
-
-                <div class="ir" id="irR">
-                    <span></span>
-                    <b>RIGHT</b>
-                    <small id="irrv">--</small>
-                </div>
-
-            </div>
-
-            <div class="obstacle">
-                <span>Obstacle sensor</span>
-                <b id="obstacle">--</b>
-            </div>
-
-            <p class="hint">
-                IR values are shown as received from the ESP32.
-                Configure the firmware for your sensor's HIGH/LOW polarity.
-            </p>
-
-        </article>
-
-    </section>
-
-
-    <!-- COMPUTER VISION -->
-    <section class="section-head">
-
-        <div>
-            <p class="eyebrow">03 / COMPUTER VISION</p>
-            <h3>Automatic crop health scan</h3>
-        </div>
-
-        <span class="pill">CAMERA → AI → RESULT</span>
-
-    </section>
-
-
-    <!-- AI DIAGNOSIS AND CAMERA LAYOUT -->
-    <section class="main-health-layout">
-
-
-        <!-- LEFT COLUMN -->
-        <div class="health-left">
-
-
-            <!-- AI DIAGNOSIS -->
-            <article class="card result-card">
-
-                <div class="card-title">
-
-                    <div>
-                        <span class="icon">✳</span>
-                        <h4>AI Diagnosis</h4>
-                    </div>
-
-                    <span class="tag">CNN ANALYSIS</span>
-
-                </div>
-
-                <div class="diagnosis">
-
-                    <div class="statusdot"></div>
-
-                    <div>
-                        <label>DETECTION RESULT</label>
-                        <h2 id="result">Awaiting scan</h2>
-                        <p id="confidence">Confidence: --</p>
-                    </div>
-
-                </div>
-
-                <div class="divider"></div>
-
-                <div class="result-note" id="ainote">
-                    Automatic crop disease analysis.
-                </div>
-
-                <div class="model-state" id="modelstate">
-                    AI MODEL: CHECKING
-                </div>
-
-            </article>
-
-
-            <!-- AI TREATMENT -->
-            <article class="card treatment-info">
-
-                <div class="card-title">
-
-                    <div>
-                        <span class="icon">🌿</span>
-                        <h4>AI Treatment Recommendations</h4>
-                    </div>
-
-                </div>
-
-                <div class="treatment-item">
-                    <h4>🌿 Disease Symptoms</h4>
-                    <p id="symptoms">Waiting for AI analysis...</p>
-                </div>
-
-                <div class="treatment-item">
-                    <h4>💊 Recommended Treatment</h4>
-                    <p id="treatment">Waiting for diagnosis...</p>
-                </div>
-
-                <div class="treatment-item">
-                    <h4>🛡 Prevention</h4>
-                    <p id="prevention">Waiting for diagnosis...</p>
-                </div>
-
-                <div class="treatment-item">
-                    <h4>🌱 Plant Status</h4>
-                    <p id="plantstatus">Awaiting scan...</p>
-                </div>
-
-            </article>
+            <span class="tag" id="gpsstatus">NO FIX</span>
 
         </div>
 
+        <div class="coords">
 
-        <!-- RIGHT COLUMN: CAMERA -->
-        <article class="card image-card">
-
-            <div class="card-title">
-
-                <div>
-                    <span class="icon">◎</span>
-                    <h4>Automatic Crop Health Scan</h4>
-                </div>
-
-                <span class="tag">ESP32-CAM</span>
-
+            <div>
+                <label>LATITUDE</label>
+                <strong id="lat">--</strong>
             </div>
 
-            <div class="photo">
-
-                <img
-                    id="leafimg"
-                    src=""
-                    alt="Waiting for automatic camera frame"
-                >
-
-                <div id="photoempty">
-                    WAITING FOR CAMERA
-                    <br>
-                    <small>New frame appears automatically</small>
-                </div>
-
+            <div>
+                <label>LONGITUDE</label>
+                <strong id="lon">--</strong>
             </div>
 
-            <p class="hint" id="scantime">
-                No image received yet
-            </p>
+        </div>
+
+        <div class="gps-foot">
+
+            <span id="sats">Satellites: --</span>
+
+            <a id="maplink" href="#" target="_blank" rel="noopener">
+                OPEN MAP ↗
+            </a>
+
+        </div>
+
+        <p class="hint">
+            NEO-6M GPS · Coordinates update automatically
+            when a GPS fix is available.
+        </p>
+
+    </article>
 
 
-            <!-- MANUAL IMAGE UPLOAD -->
-            <div class="upload-section">
+    <!-- IR LINE TRACKING -->
+    <article class="card">
 
-                <input
-                    type="file"
-                    id="leafUpload"
-                    accept="image/*"
-                    hidden
-                >
+        <div class="card-title">
 
-                <button type="button" id="uploadLeafBtn">
-                    📁 Upload Leaf Image
-                </button>
-
+            <div>
+                <span class="icon">⌁</span>
+                <h4>IR line tracking</h4>
             </div>
 
-        </article>
+            <span class="tag">3-CHANNEL</span>
 
-    </section>
+        </div>
+
+        <div class="irrow">
+
+            <div class="ir" id="irL">
+                <span></span>
+                <b>LEFT</b>
+                <small id="irlv">--</small>
+            </div>
+
+            <div class="ir" id="irC">
+                <span></span>
+                <b>CENTER</b>
+                <small id="ircv">--</small>
+            </div>
+
+            <div class="ir" id="irR">
+                <span></span>
+                <b>RIGHT</b>
+                <small id="irrv">--</small>
+            </div>
+
+        </div>
+
+        <div class="obstacle">
+            <span>Obstacle sensor</span>
+            <b id="obstacle">--</b>
+        </div>
+
+        <p class="hint">
+            IR values are shown as received from the ESP32.
+            Configure the firmware for your sensor's HIGH/LOW polarity.
+        </p>
+
+    </article>
+
+</section>
 
 
-    <!-- DISEASED PLANT GPS MAP -->
-    <section class="card map-card">
+<!-- COMPUTER VISION -->
+<section class="section-head">
+
+    <div>
+        <p class="eyebrow">03 / COMPUTER VISION</p>
+        <h3>Automatic crop health scan</h3>
+    </div>
+
+    <span class="pill">CAMERA → AI → RESULT</span>
+
+</section>
+
+
+<!-- NEW 2 x 2 HEALTH DASHBOARD -->
+<section class="main-health-layout">
+
+    <!-- TOP LEFT: AI DIAGNOSIS -->
+    <article class="card result-card">
+
+        <div class="card-title">
+
+            <div>
+                <span class="icon">✳</span>
+                <h4>AI Diagnosis</h4>
+            </div>
+
+            <span class="tag">CNN ANALYSIS</span>
+
+        </div>
+
+        <div class="diagnosis">
+
+            <div class="statusdot"></div>
+
+            <div>
+                <label>DETECTION RESULT</label>
+                <h2 id="result">Awaiting scan</h2>
+                <p id="confidence">Confidence: --</p>
+            </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="result-note" id="ainote">
+            Automatic crop disease analysis.
+        </div>
+
+        <div class="model-state" id="modelstate">
+            AI MODEL: CHECKING
+        </div>
+
+    </article>
+
+
+    <!-- TOP RIGHT: DISEASED PLANT MAP -->
+    <article class="card map-card">
 
         <div class="card-title">
 
@@ -398,26 +283,103 @@
 
         </div>
 
-        <div
-            id="plantMap"
-            style="height: 400px; width: 100%; border-radius: 12px;">
-        </div>
+        <div id="plantMap"></div>
 
         <p class="hint">
             Only diseased plants will be marked on the map.
         </p>
 
-    </section>
+    </article>
 
 
-</main>
+    <!-- BOTTOM LEFT: AI TREATMENT -->
+    <article class="card treatment-info">
+
+        <div class="card-title">
+
+            <div>
+                <span class="icon">🌿</span>
+                <h4>AI Treatment Recommendations</h4>
+            </div>
+
+        </div>
+
+        <div class="treatment-item">
+            <h4>🌿 Disease Symptoms</h4>
+            <p id="symptoms">Waiting for AI analysis...</p>
+        </div>
+
+        <div class="treatment-item">
+            <h4>💊 Recommended Treatment</h4>
+            <p id="treatment">Waiting for diagnosis...</p>
+        </div>
+
+        <div class="treatment-item">
+            <h4>🛡 Prevention</h4>
+            <p id="prevention">Waiting for diagnosis...</p>
+        </div>
+
+        <div class="treatment-item">
+            <h4>🌱 Plant Status</h4>
+            <p id="plantstatus">Awaiting scan...</p>
+        </div>
+
+    </article>
 
 
-<!-- LEAFLET MAP JAVASCRIPT -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- BOTTOM RIGHT: AUTOMATIC CAMERA -->
+    <article class="card image-card">
 
-<!-- MAIN DASHBOARD JAVASCRIPT -->
-<script src="{{ url_for('static', filename='app.js') }}"></script>
+        <div class="card-title">
 
-</body>
+            <div>
+                <span class="icon">◎</span>
+                <h4>Automatic Crop Health Scan</h4>
+            </div>
+
+            <span class="tag">ESP32-CAM</span>
+
+        </div>
+
+        <div class="photo">
+
+            <img
+                id="leafimg"
+                src=""
+                alt="Waiting for automatic camera frame"
+            >
+
+            <div id="photoempty">
+                WAITING FOR CAMERA
+                <br>
+                <small>New frame appears automatically</small>
+            </div>
+
+        </div>
+
+        <p class="hint" id="scantime">
+            No image received yet
+        </p>
+
+        <!-- MANUAL IMAGE UPLOAD -->
+        <div class="upload-section">
+
+            <input
+                type="file"
+                id="leafUpload"
+                accept="image/*"
+                hidden
+            >
+
+            <button type="button" id="uploadLeafBtn">
+                📁 Upload Leaf Image
+            </button>
+
+        </div>
+
+    </article>
+
+</section>
+
+</main><!-- LEAFLET MAP JAVASCRIPT --><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><!-- MAIN DASHBOARD JAVASCRIPT --><script src="{{ url_for('static', filename='app.js') }}"></script></body>
 </html>
