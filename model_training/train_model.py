@@ -36,9 +36,13 @@ class_names = train_ds.class_names
 print("Total disease classes:", len(class_names))
 print("Classes:", class_names)
 
+
 # Save class names
-with open(Path(__file__).parent / "class_names.json", "w") as f:
-    json.dump(class_names, f)
+MODEL_DIR = Path(__file__).resolve().parent.parent / "models"
+MODEL_DIR.mkdir(exist_ok=True)
+
+with open(MODEL_DIR / "class_names.json", "w", encoding="utf-8") as f:
+    json.dump(class_names, f, ensure_ascii=False)
 
 AUTOTUNE = tf.data.AUTOTUNE
 
@@ -95,9 +99,12 @@ model.fit(
 )
 
 # Save trained model
-model.save(
-    Path(__file__).parent / "phytobot_model.keras"
-)
+MODEL_DIR = Path(__file__).resolve().parent.parent / "models"
+MODEL_DIR.mkdir(exist_ok=True)
+
+model.save(MODEL_DIR / "phytobot_model.keras")
+
+
 
 print("Training completed successfully!")
 print("PhytoBot AI model saved!")

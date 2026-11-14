@@ -56,7 +56,7 @@ def load_model():
     if _model_error:
         return None
     if not MODEL_PATH.exists():
-        _model_error = "No trained model found. Add models/leaf_disease_model.keras."
+        _model_error = "No trained model found. Add models/phytobot_model.keras."
         return None
     try:
         from tensorflow.keras.models import load_model as keras_load
