@@ -55,4 +55,39 @@ img, video, canvas {
     .dashboard-content {
         grid-template-columns: 1fr;
     }
+    /* LANDSCAPE DASHBOARD */
+
+@media screen and (min-width: 1024px) {
+
+    body {
+        width: 100%;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .dashboard-container,
+    .container,
+    .main-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .dashboard-grid,
+    .dashboard-content {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 20px;
+        align-items: start;
+    }
+
+    .sidebar {
+        width: 240px;
+    }
+
+    .main-content {
+        width: 100%;
+        min-width: 0;
+    }
+}
 }
