@@ -362,6 +362,188 @@ footer {
     main {
         padding: 12px 2%;
     }
+    /* FULL SCREEN LANDSCAPE DASHBOARD */
+
+@media screen and (min-width: 1024px) {
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .top {
+        height: 60px;
+        padding: 5px 25px;
+    }
+
+    .logo {
+        width: 38px;
+        height: 38px;
+    }
+
+    .brand h1 {
+        font-size: 19px;
+    }
+
+    main {
+        height: calc(100vh - 60px);
+        max-width: 100%;
+        padding: 8px 20px;
+        display: grid;
+        grid-template-rows:
+            70px
+            25px
+            75px
+            25px
+            105px
+            25px
+            minmax(130px, 1fr)
+            20px;
+        gap: 5px;
+        overflow: hidden;
+    }
+
+    .hero {
+        min-height: 0;
+        height: 100%;
+        padding: 8px 20px;
+        margin: 0;
+    }
+
+    .hero h2 {
+        font-size: 21px;
+        margin: 3px 0;
+    }
+
+    .hero .sub {
+        font-size: 10px;
+        margin: 3px 0;
+    }
+
+    .robot-art {
+        height: 55px;
+    }
+
+    .section-head {
+        margin: 0;
+        min-height: 0;
+    }
+
+    .section-head h3 {
+        font-size: 13px;
+        margin: 2px 0;
+    }
+
+    .section-head .eyebrow {
+        font-size: 8px;
+        margin: 0;
+    }
+
+    .grid {
+        gap: 8px;
+        min-height: 0;
+        height: 100%;
+    }
+
+    .metrics {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .metrics .card {
+        padding: 7px 12px;
+    }
+
+    .metrics .value {
+        font-size: 20px;
+        margin: 5px 0;
+    }
+
+    .metrics .card p {
+        font-size: 9px;
+        margin: 4px 0;
+    }
+
+    .metrics .bar {
+        height: 4px;
+    }
+
+    .two {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .two .card {
+        padding: 9px 13px;
+    }
+
+    .two .coords {
+        margin: 8px 0;
+    }
+
+    .two .coords strong {
+        font-size: 12px;
+    }
+
+    .two .irrow {
+        margin: 8px 0;
+    }
+
+    .two .ir span {
+        width: 22px;
+        height: 22px;
+    }
+
+    .two .hint {
+        font-size: 8px;
+        line-height: 1.2;
+        margin: 4px 0;
+    }
+
+    .vision {
+        grid-template-columns: 1fr 1fr;
+        min-height: 0;
+    }
+
+    .vision .card {
+        padding: 10px 14px;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .photo {
+        height: calc(100% - 65px);
+        min-height: 70px;
+        margin-top: 8px;
+    }
+
+    .diagnosis {
+        margin: 12px 0;
+    }
+
+    .diagnosis h2 {
+        font-size: 19px;
+    }
+
+    .result-note {
+        font-size: 10px;
+    }
+
+    .vision .hint {
+        font-size: 9px;
+        margin: 4px 0;
+    }
+
+    footer {
+        margin: 0;
+        padding: 4px 0;
+        font-size: 8px;
+    }
+}
 
     .hero {
         min-height: 125px;
