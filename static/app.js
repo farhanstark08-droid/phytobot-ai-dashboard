@@ -105,3 +105,74 @@ $('leafUpload').addEventListener('change', async function () {
         this.value = '';
     }
 });
+// PHYTOBOT DISEASED PLANT GPS MAP
+
+let plantMap = null;
+let plantMarkers = [];
+
+async function loadPlantLocations() {
+    const mapElement = document.getElementById("plantMap");
+
+    if (!mapElement || typeof L === "undefined") return;
+
+    if (!plantMap) {
+        plantMap = L.map("plantMap").setView([23.79, 86.43], 13);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap"
+        }).addTo(plantMap);
+    }
+
+    try {
+        const response = await fetch("/api/plant-locations");
+        const data = await response.json();
+
+        plantMarkers.forEach(marker => plantMap.removeLayer(marker));
+        plantMarkers = [];
+
+        data.plants.forEach(plant => {
+            if (plant.latitude == null || plant.longitude == null) return;
+
+            const marker = L.marker([
+                plant.latitude,
+                plant.longitude
+            ]).addTo(plantMap);
+
+            marker.bindPopup(`
+                <b>Disease:</b> ${plant.disease}<br>
+                <b>Confidence:</b> ${Number(plant.confidence).toFixed(1)}%<br>
+                <b>Date:</b> ${plant.timestamp}
+            `);
+
+            plantMarkers.push(marker);
+        });
+
+        if (plantMarkers.length > 0) {
+            const group = L.featureGroup(plantMarkers);
+            plantMap.fitBounds(group.getBounds(), { padding: [30, 30] });
+        }
+
+    } catch (error) {
+        console.error("Plant map error:", error);
+    }
+}
+
+loadPlantLocations();
+setInterval(loadPlantLocations, 10000);
+/* PHYTOBOT GPS MAP */
+
+.map-card {
+    margin-top: 20px;
+    width: 100%;
+}
+
+#plantMap {
+    height: 400px;
+    width: 100%;
+    border-radius: 12px;
+    z-index: 1;
+}
+
+.map-card .card-title {
+    margin-bottom: 15px;
+}
