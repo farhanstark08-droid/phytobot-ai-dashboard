@@ -1528,3 +1528,31 @@ footer {
     min-width: 0;
     overflow: hidden;
 }
+/* COMPACT AI DIAGNOSIS AND GPS MAP */
+
+.main-health-layout > .result-card {
+    min-height: 0;
+    padding: 14px;
+}
+
+.main-health-layout > .map-card {
+    padding: 14px;
+}
+
+.main-health-layout > .map-card #plantMap {
+    height: 220px;
+    min-height: 220px;
+}
+
+.main-health-layout > .result-card .card-title,
+.main-health-layout > .map-card .card-title {
+    margin-bottom: 10px;
+}
+
+.main-health-layout > .result-card .diagnosis {
+    padding: 8px 0;
+}
+
+.main-health-layout > .result-card .result-note {
+    margin-top: 8px;
+}
