@@ -3,3 +3,7 @@ Pillow>=10.0
 numpy>=1.26
 # Install TensorFlow separately if your computer supports it:
 # tensorflow>=2.15
+<<<<<<< HEAD
+=======
+gunicorn
+>>>>>>> 12942a99820c20f29c7b3b1bfa14beff2ea1cf1d

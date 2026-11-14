@@ -2,7 +2,10 @@ from flask import Flask, request, jsonify, render_template, send_from_directory
 from datetime import datetime, timezone
 from pathlib import Path
 import sqlite3, os, json, uuid
+<<<<<<< HEAD
 from model_training.disease_treatments import get_treatment
+=======
+>>>>>>> 12942a99820c20f29c7b3b1bfa14beff2ea1cf1d
 
 try:
     import numpy as np
@@ -65,6 +68,7 @@ def load_model():
     except Exception as e:
         _model_error = str(e)
         return None
+<<<<<<< HEAD
 def classify_image(path):
     model = load_model()
 
@@ -102,6 +106,26 @@ def classify_image(path):
     except Exception as e:
         return "Analysis error", None, str(e)
 
+=======
+
+def classify_image(path):
+    model = load_model()
+    if model is None or np is None or Image is None:
+        return "AI model not configured", None, _model_error or "Install TensorFlow and Pillow; add a trained model."
+    try:
+        labels = ["Healthy", "Early Blight", "Late Blight"]
+        if LABELS_PATH.exists():
+            labels = json.loads(LABELS_PATH.read_text(encoding="utf-8"))
+        img = Image.open(path).convert("RGB").resize((224, 224))
+        arr = np.asarray(img, dtype="float32") / 255.0
+        pred = model.predict(np.expand_dims(arr, axis=0), verbose=0)[0]
+        idx = int(np.argmax(pred))
+        return labels[idx], round(float(pred[idx]) * 100, 1), "Automatic CNN inference"
+    except Exception as e:
+        return "Analysis error", None, str(e)
+
+@app.route("/")
+>>>>>>> 12942a99820c20f29c7b3b1bfa14beff2ea1cf1d
 def index():
     return render_template("index.html")
 
@@ -143,9 +167,12 @@ def frame():
                     (ts, name, result, confidence, note))
     return jsonify(ok=True, image=name, result=result, confidence=confidence, note=note, timestamp=ts)
 
+<<<<<<< HEAD
 @app.route("/")
 def index():
     return render_template("index.html")
+=======
+>>>>>>> 12942a99820c20f29c7b3b1bfa14beff2ea1cf1d
 @app.route("/api/status")
 def status():
     with db() as con:
