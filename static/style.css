@@ -923,3 +923,25 @@ footer {
         line-height: 1.5;
     }
 }
+/* FIX ENVIRONMENTAL SECTION HEADER */
+
+@media screen and (min-width: 1024px) {
+
+    main > .section-head:nth-of-type(2) {
+        display: flex;
+        align-items: center;
+        min-height: 35px;
+        padding: 5px 0;
+        overflow: visible;
+    }
+
+    main > .section-head:nth-of-type(2) .eyebrow {
+        line-height: 1.6;
+        margin: 0 0 5px;
+    }
+
+    main > .section-head:nth-of-type(2) h3 {
+        line-height: 1.5;
+        margin: 0;
+    }
+}
