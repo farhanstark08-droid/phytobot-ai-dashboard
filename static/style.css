@@ -1038,3 +1038,75 @@ footer {
         flex-shrink: 0;
     }
 }
+/* HERO TEXT OVERLAP FIX */
+
+@media screen and (min-width: 1024px) {
+
+    main {
+        grid-template-rows:
+            105px
+            35px
+            75px
+            35px
+            105px
+            35px
+            minmax(150px, 1fr)
+            22px;
+
+        gap: 5px;
+    }
+
+    .hero {
+        height: 100%;
+        min-height: 105px;
+        display: flex;
+        align-items: center;
+        padding: 10px 22px;
+        overflow: visible;
+    }
+
+    .hero > div:first-child {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .hero .eyebrow {
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .hero h2 {
+        font-size: 23px;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    .hero .sub {
+        font-size: 10px;
+        line-height: 1.5;
+        margin: 0;
+    }
+
+    .section-head {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .section-head > div {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .section-head .eyebrow {
+        margin: 0;
+        line-height: 1.5;
+    }
+
+    .section-head h3 {
+        margin: 0;
+        line-height: 1.4;
+    }
+}
