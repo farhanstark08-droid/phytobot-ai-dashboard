@@ -66,3 +66,42 @@ async function refresh() {
   }
 }
 refresh(); setInterval(refresh,2000);
+$('uploadLeafBtn').addEventListener('click', () => {
+    $('leafUpload').click();
+});
+
+$('leafUpload').addEventListener('change', async function () {
+    const file = this.files[0];
+
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    $('uploadLeafBtn').textContent = 'Analysing...';
+
+    try {
+        const response = await fetch('/api/upload', {
+            method: 'POST',
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alert(data.error || 'Upload failed');
+            return;
+        }
+
+        alert('Image uploaded! AI diagnosis completed.');
+        lastScan = '';
+
+        await refresh();
+
+    } catch (error) {
+        alert('Upload error. Please try again.');
+    } finally {
+        $('uploadLeafBtn').textContent = '📁 Upload Leaf Image';
+        this.value = '';
+    }
+});

@@ -126,10 +126,21 @@
                 <small>New frame appears automatically</small>
             </div>
         </div>
-
         <p class="hint" id="scantime">
-            No image received yet
-        </p>
+    No image received yet
+</p>
+
+<div class="upload-section">
+    <input type="file" id="leafUpload" accept="image/*" hidden>
+
+    <button type="button" id="uploadLeafBtn">
+        📁 Upload Leaf Image
+    </button>
+</div>
+        
     </article>
 
 </section>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

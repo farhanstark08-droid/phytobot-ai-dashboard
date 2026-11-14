@@ -143,6 +143,48 @@ def frame():
                     (ts, name, result, confidence, note))
     return jsonify(ok=True, image=name, result=result, confidence=confidence, note=note, timestamp=ts)
 
+@app.route("/api/upload", methods=["POST"])
+def upload_leaf():
+    file = request.files.get("file")
+
+    if not file or not file.filename:
+        return jsonify(ok=False, error="No image selected"), 400
+
+    ext = file.filename.rsplit(".", 1)[-1].lower()
+
+    if ext not in ["jpg", "jpeg", "png", "webp"]:
+        return jsonify(ok=False, error="Unsupported image format"), 400
+
+    raw = file.read()
+
+    if not raw:
+        return jsonify(ok=False, error="Empty image"), 400
+
+    if len(raw) > 8 * 1024 * 1024:
+        return jsonify(ok=False, error="Image too large"), 413
+
+    name = datetime.now().strftime("%Y%m%d_%H%M%S_") + uuid.uuid4().hex[:6] + "." + ext
+
+    path = IMAGE_DIR / name
+    path.write_bytes(raw)
+
+    result, confidence, note = classify_image(path)
+    ts = now_iso()
+
+    with db() as con:
+        con.execute(
+            "INSERT INTO scans (timestamp,image_name,result,confidence,note) VALUES (?,?,?,?,?)",
+            (ts, name, result, confidence, note)
+        )
+
+    return jsonify(
+        ok=True,
+        image=name,
+        result=result,
+        confidence=confidence,
+        note=note,
+        timestamp=ts
+    )
 @app.route("/")
 def index():
     return render_template("index.html")
