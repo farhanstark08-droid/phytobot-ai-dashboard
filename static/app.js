@@ -160,19 +160,18 @@ async function loadPlantLocations() {
 loadPlantLocations();
 setInterval(loadPlantLocations, 10000);
 /* PHYTOBOT GPS MAP */
+console.log("PhytoBot Upload System Loaded");
 
-.map-card {
-    margin-top: 20px;
-    width: 100%;
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const uploadBtn = document.getElementById("uploadLeafBtn");
+    const fileInput = document.getElementById("leafUpload");
 
-#plantMap {
-    height: 400px;
-    width: 100%;
-    border-radius: 12px;
-    z-index: 1;
-}
+    if (!uploadBtn || !fileInput) {
+        console.error("Upload button or input missing!");
+        return;
+    }
 
-.map-card .card-title {
-    margin-bottom: 15px;
-}
+    uploadBtn.addEventListener("click", () => {
+        fileInput.click();
+    });
+});
