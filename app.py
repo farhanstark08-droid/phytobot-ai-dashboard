@@ -151,11 +151,39 @@ def classify_image(path):
             .convert("RGB")
             .resize((224, 224))
         )
+        
 
         arr = np.asarray(img, dtype="float32")
         arr = np.expand_dims(arr, axis=0)
+        pred = model.predict(arr,verbose=0)[0]
+        
 
+        
+
+        # AI MODEL PREDICTION
         pred = model.predict(arr, verbose=0)[0]
+
+        # TOP 5 PREDICTIONS
+        top_indices = np.argsort(pred)[-5:][::-1]
+
+        print("\n========== TOP 5 PREDICTIONS ==========")
+
+        for i in top_indices:
+            print(
+                labels[int(i)],
+                round(float(pred[i]) * 100, 2),
+                "%"
+            )
+
+        print("=======================================")
+
+        # BEST PREDICTION
+        idx = int(np.argmax(pred))
+        disease = labels[idx]
+
+        confidence = round(
+            float(pred[idx]) * 100, 2
+        )
 
         idx = int(np.argmax(pred))
         disease = labels[idx]
@@ -301,7 +329,7 @@ def telemetry():
                 ir_center,
                 ir_right,
                 obstacle,
-                battery
+                batteryarr = np.as
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, values)

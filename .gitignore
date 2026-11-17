@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+data/
+models/*.keras
+models/*.h5
+model_training/dataset/
+model_training/additional_dataset/
+model_training/combined_dataset/
